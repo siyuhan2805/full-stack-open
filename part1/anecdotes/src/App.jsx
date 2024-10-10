@@ -39,6 +39,8 @@ const App = () => {
   const popularAnecdote = () => {
     return votes.indexOf(Math.max(...votes))
   }
+  
+  
 
   return (
     <div>
