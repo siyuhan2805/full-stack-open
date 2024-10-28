@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
 let persons = [
@@ -25,7 +26,11 @@ let persons = [
 ]
 
 app.use(express.json())
-  
+morgan.token('body', (request, response) => {
+    return JSON.stringify(request.body)
+}) 
+
+app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'))
 
 // HTTP routes
 // GET route for root directory of the application 
@@ -87,7 +92,6 @@ app.post('/api/persons', (request, response) => {
     persons = persons.concat(person)
     response.json(person)
 })
-
 
 
 const PORT = 3001
